@@ -1,0 +1,13 @@
+# OS X
+.DS_Store
+
+# Xcode
+build/
+*.pbxuser
+xcuserdata
+*.xccheckout
+profile
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
