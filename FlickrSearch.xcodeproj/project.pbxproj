@@ -24,6 +24,8 @@
 		162CCA762163BF1F00864AFF /* FlickrSearchPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA752163BF1F00864AFF /* FlickrSearchPresenterTests.swift */; };
 		162CCA782163BFF600864AFF /* FlickrSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA772163BFF600864AFF /* FlickrSearchPresenter.swift */; };
 		162CCA7A2163C05400864AFF /* FlickrSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA792163C05400864AFF /* FlickrSearchModel.swift */; };
+		162CCA7C2163CA0300864AFF /* FlickrSearchInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA7B2163CA0300864AFF /* FlickrSearchInteractorTests.swift */; };
+		162CCA7E2163CB2C00864AFF /* FlickrSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA7D2163CB2C00864AFF /* FlickrSearchInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		162CCA752163BF1F00864AFF /* FlickrSearchPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchPresenterTests.swift; sourceTree = "<group>"; };
 		162CCA772163BFF600864AFF /* FlickrSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchPresenter.swift; sourceTree = "<group>"; };
 		162CCA792163C05400864AFF /* FlickrSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchModel.swift; sourceTree = "<group>"; };
+		162CCA7B2163CA0300864AFF /* FlickrSearchInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchInteractorTests.swift; sourceTree = "<group>"; };
+		162CCA7D2163CB2C00864AFF /* FlickrSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,7 @@
 				162CCA682163B58900864AFF /* FlickrSearchWorker.swift */,
 				162CCA772163BFF600864AFF /* FlickrSearchPresenter.swift */,
 				162CCA792163C05400864AFF /* FlickrSearchModel.swift */,
+				162CCA7D2163CB2C00864AFF /* FlickrSearchInteractor.swift */,
 			);
 			path = FlickrSearch;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				162CCA652163ACC100864AFF /* Mock */,
 				162CCA5F2163AB9700864AFF /* FlickrSearchWorkerTests.swift */,
 				162CCA752163BF1F00864AFF /* FlickrSearchPresenterTests.swift */,
+				162CCA7B2163CA0300864AFF /* FlickrSearchInteractorTests.swift */,
 			);
 			path = FlickrSearch;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 				162CCA582163A85500864AFF /* Photo.swift in Sources */,
 				162CCA532163A6CC00864AFF /* FlickrResponse.swift in Sources */,
 				162CCA512163A61300864AFF /* ApiProtocol.swift in Sources */,
+				162CCA7E2163CB2C00864AFF /* FlickrSearchInteractor.swift in Sources */,
 				162CCA222163A56E00864AFF /* AppDelegate.swift in Sources */,
 				162CCA562163A74800864AFF /* Content.swift in Sources */,
 				162CCA782163BFF600864AFF /* FlickrSearchPresenter.swift in Sources */,
@@ -343,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				162CCA372163A57000864AFF /* Canary.swift in Sources */,
+				162CCA7C2163CA0300864AFF /* FlickrSearchInteractorTests.swift in Sources */,
 				162CCA632163AB9700864AFF /* FlickrSearchWorkerTests.swift in Sources */,
 				162CCA762163BF1F00864AFF /* FlickrSearchPresenterTests.swift in Sources */,
 				162CCA672163ACD300864AFF /* Seeds.swift in Sources */,

@@ -9,6 +9,10 @@
 import Foundation
 
 enum FlickrSearchModel {
+  struct Request {
+    let searchTerm: String
+    let page: Int
+  }
   struct Response {
     var photoContent: Content
   }
