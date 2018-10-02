@@ -6,12 +6,18 @@
 //  Copyright (c) 2018 rugmangathan. All rights reserved.
 //
 
-protocol FlickrSearchPresentationLogic: class {
+import Foundation
+
+protocol FlickrSearchPresentationLogic {
   func present(response: FlickrSearchModel.Response)
+  func resetForNewSearch(viewModel: FlickrSearchModel.ViewModel)
 }
 
 protocol FlickrSearchDisplayLogic: class {
   func displayFetchedImages(viewModel: FlickrSearchModel.ViewModel)
+  func setPage(_ pageCount: Int)
+  func setImageUrl(_ urls: [URL])
+  func setSearchTerm(_ term: String)
 }
 
 class FlickrSearchPresenter: FlickrSearchPresentationLogic {
@@ -28,5 +34,11 @@ class FlickrSearchPresenter: FlickrSearchPresentationLogic {
     viewController?.displayFetchedImages(
       viewModel: FlickrSearchModel.ViewModel(displayInfo: displayInfo)
     )
+  }
+
+  func resetForNewSearch(viewModel: FlickrSearchModel.ViewModel) {
+    viewController?.setPage(viewModel.displayInfo.page)
+    viewController?.setImageUrl([])
+    viewController?.setSearchTerm("")
   }
 }

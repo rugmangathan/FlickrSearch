@@ -13,7 +13,7 @@ struct FlickrResponse: Decodable, Equatable {
   let stat: String
 
   private enum CodingKeys: String, CodingKey {
-    case content = "photo"
+    case content = "photos"
     case stat
   }
 }

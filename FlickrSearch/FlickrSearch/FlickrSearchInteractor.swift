@@ -10,10 +10,14 @@ import Foundation
 
 protocol FlickrSearchBusinessLogic: class {
   func fetch(_ resquest: FlickrSearchModel.Request)
+  func cancel()
+  func resetForNewSearch()
 }
 
-class FlickrSearchInteractor: FlickrSearchBusinessLogic {
-  weak var presenter: FlickrSearchPresentationLogic?
+protocol FlickrSearchDataStore {}
+
+class FlickrSearchInteractor: FlickrSearchBusinessLogic, FlickrSearchDataStore {
+  var presenter: FlickrSearchPresentationLogic?
   lazy var worker: FlickrSearchWorker = FlickrSearchWorker()
 
   func fetch(_ resquest: FlickrSearchModel.Request) {
@@ -24,5 +28,13 @@ class FlickrSearchInteractor: FlickrSearchBusinessLogic {
         )
       }
     }
+  }
+
+  func cancel() {
+    worker.cancel()
+  }
+
+  func resetForNewSearch() {
+    
   }
 }

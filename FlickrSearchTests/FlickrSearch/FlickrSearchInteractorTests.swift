@@ -32,6 +32,9 @@ class FlickrSearchInteractorTests: XCTestCase {
     func present(response: FlickrSearchModel.Response) {
       presenterCalled = true
     }
+
+    func resetForNewSearch(viewModel: FlickrSearchModel.ViewModel) {
+    }
   }
 
   func test_shouldAskWorkerToFetchGists_whenSearchIsCalled() {
