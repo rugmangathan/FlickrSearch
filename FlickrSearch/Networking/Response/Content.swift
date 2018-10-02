@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Content: Decodable {
+struct Content: Decodable, Equatable {
   let page: Int
   let pages: Int
   let perPage: Int

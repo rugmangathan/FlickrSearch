@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FlickrResponse: Decodable {
+struct FlickrResponse: Decodable, Equatable {
   let content: Content
   let stat: String
 
