@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 rugmangathan. All rights reserved.
 //
 
-protocol FlickrSearchPresentationLogic {
+protocol FlickrSearchPresentationLogic: class {
   func present(response: FlickrSearchModel.Response)
 }
 

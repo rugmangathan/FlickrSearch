@@ -18,10 +18,19 @@ class FlickrSearchInteractorTests: XCTestCase {
 
     override func search(with text: String, page: Int, coimpletionHandler: @escaping NetwrokCompletion) {
       fetchSuccess = true
+      coimpletionHandler(response, nil)
     }
 
     override func cancel() {
 
+    }
+  }
+
+  class FlickrSearchPresentationLogicSpy: FlickrSearchPresentationLogic {
+    var presenterCalled = false
+
+    func present(response: FlickrSearchModel.Response) {
+      presenterCalled = true
     }
   }
 
@@ -43,6 +52,30 @@ class FlickrSearchInteractorTests: XCTestCase {
     // Then
     XCTAssertTrue(
       workerSpy.fetchSuccess,
+      "search(text: page: completionHandler:) should ask worker to fetch images"
+    )
+  }
+
+  func test_shouldDisplayFetchedImages_whenWorkerReturnsSuccess() {
+    // Given
+    let interactor = FlickrSearchInteractor()
+    let workerSpy = FlickrSearchWorkerSpy()
+    let presenter = FlickrSearchPresentationLogicSpy()
+    interactor.worker = workerSpy
+    interactor.presenter = presenter
+    let searchTerm = "Dog"
+    let page = 1
+
+    // When
+    let request = FlickrSearchModel.Request(
+      searchTerm: searchTerm,
+      page: page
+    )
+    interactor.fetch(request)
+
+    // Then
+    XCTAssertTrue(
+      presenter.presenterCalled,
       "search(text: page: completionHandler:) should ask worker to fetch images"
     )
   }

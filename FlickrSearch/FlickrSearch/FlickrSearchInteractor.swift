@@ -13,12 +13,14 @@ protocol FlickrSearchBusinessLogic: class {
 }
 
 class FlickrSearchInteractor: FlickrSearchBusinessLogic {
-  weak var presenter: FlickrSearchBusinessLogic?
+  weak var presenter: FlickrSearchPresentationLogic?
   lazy var worker: FlickrSearchWorker = FlickrSearchWorker()
 
   func fetch(_ resquest: FlickrSearchModel.Request) {
     worker.search(with: resquest.searchTerm, page: resquest.page) { (response, errror) in
-
+      self.presenter?.present(
+        response: FlickrSearchModel.Response(photoContent: response!.content)
+      )
     }
   }
 }
