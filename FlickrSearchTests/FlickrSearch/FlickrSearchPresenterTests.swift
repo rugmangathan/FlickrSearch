@@ -13,9 +13,10 @@ import XCTest
 class FlickrSearchPresenterTests: XCTestCase {
   class FlickrSearchDisplayLogicSpy: FlickrSearchDisplayLogic {
     var displayFetchedImagesCalled: Bool = false
-    var setPageCelled: Bool = false
+    var setPageCalled: Bool = false
     var setImageUrlCalled: Bool = false
     var setSearchTermCalled: Bool = false
+    var showErrorCalled: Bool =  false
     var displayLogicViewModel: FlickrSearchModel.ViewModel!
 
     func displayFetchedImages(viewModel: FlickrSearchModel.ViewModel) {
@@ -24,7 +25,7 @@ class FlickrSearchPresenterTests: XCTestCase {
     }
 
     func setPage(_ pageCount: Int) {
-      setPageCelled = true
+      setPageCalled = true
     }
 
     func setImageUrl(_ urls: [URL]) {
@@ -34,14 +35,24 @@ class FlickrSearchPresenterTests: XCTestCase {
     func setSearchTerm(_ term: String) {
       setSearchTermCalled = true
     }
+
+    func showError(_ message: String) {
+      showErrorCalled = true
+    }
+  }
+
+  var presenter: FlickrSearchPresenter!
+  var displayLogicSpy: FlickrSearchDisplayLogicSpy!
+
+  override func setUp() {
+    super.setUp()
+
+    presenter = FlickrSearchPresenter()
+    displayLogicSpy = FlickrSearchDisplayLogicSpy()
+    presenter.viewController = displayLogicSpy
   }
 
   func test_presentFetchedGists_shouldAskViewControllerToDisplayImages() {
-    // Given
-    let presenter = FlickrSearchPresenter()
-    let displayLogicSpy = FlickrSearchDisplayLogicSpy()
-    presenter.viewController = displayLogicSpy
-
     // When
     let fetchedImages = Seeds.Flickr.flickrResponse
     let response = FlickrSearchModel.Response(
@@ -64,11 +75,6 @@ class FlickrSearchPresenterTests: XCTestCase {
   }
 
   func test_shouldAskViewControllerToResetPageCountAndSearchTerm_whenResetForNewSearchIsCalled() {
-    // Given
-    let presenter = FlickrSearchPresenter()
-    let displayLogicSpy = FlickrSearchDisplayLogicSpy()
-    presenter.viewController = displayLogicSpy
-
     // When
     let viewModel = Seeds.Flickr.resetViewModel
     presenter.resetForNewSearch(
@@ -77,13 +83,23 @@ class FlickrSearchPresenterTests: XCTestCase {
 
     // Then
     XCTAssertTrue(
-      displayLogicSpy.setPageCelled
+      displayLogicSpy.setPageCalled
     )
     XCTAssertTrue(
       displayLogicSpy.setImageUrlCalled
     )
     XCTAssertTrue(
       displayLogicSpy.setSearchTermCalled
+    )
+  }
+
+  func test_shouldAskViewControllerToShowErrorMessage_whenErrorIsPresented() {
+    // When
+    presenter.showError(ApiError.dataNotFound.rawValue)
+
+    // Then
+    XCTAssertTrue(
+      displayLogicSpy.showErrorCalled
     )
   }
 }

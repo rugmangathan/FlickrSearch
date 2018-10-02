@@ -22,9 +22,13 @@ class FlickrSearchInteractor: FlickrSearchBusinessLogic, FlickrSearchDataStore {
 
   func fetch(_ resquest: FlickrSearchModel.Request) {
     worker.search(with: resquest.searchTerm, page: resquest.page) { (response, error) in
-      if error == nil {
+      if let error = error as? ApiError {
+        self.presenter?.showError(error.rawValue)
+      }
+
+      if let response = response {
         self.presenter?.present(
-          response: FlickrSearchModel.Response(photoContent: response!.content)
+          response: FlickrSearchModel.Response(photoContent: response.content)
         )
       }
     }
@@ -35,6 +39,9 @@ class FlickrSearchInteractor: FlickrSearchBusinessLogic, FlickrSearchDataStore {
   }
 
   func resetForNewSearch() {
-    
+    let viewModel = FlickrSearchModel.ViewModel(
+      displayInfo: FlickrSearchModel.ViewModel.DisplayInfo(page: 0, urls: [])
+    )
+    presenter?.resetForNewSearch(viewModel: viewModel)
   }
 }

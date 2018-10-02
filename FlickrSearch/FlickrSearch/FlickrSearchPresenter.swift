@@ -11,6 +11,7 @@ import Foundation
 protocol FlickrSearchPresentationLogic {
   func present(response: FlickrSearchModel.Response)
   func resetForNewSearch(viewModel: FlickrSearchModel.ViewModel)
+  func showError(_ message: String)
 }
 
 protocol FlickrSearchDisplayLogic: class {
@@ -18,6 +19,7 @@ protocol FlickrSearchDisplayLogic: class {
   func setPage(_ pageCount: Int)
   func setImageUrl(_ urls: [URL])
   func setSearchTerm(_ term: String)
+  func showError(_ message: String)
 }
 
 class FlickrSearchPresenter: FlickrSearchPresentationLogic {
@@ -40,5 +42,9 @@ class FlickrSearchPresenter: FlickrSearchPresentationLogic {
     viewController?.setPage(viewModel.displayInfo.page)
     viewController?.setImageUrl([])
     viewController?.setSearchTerm("")
+  }
+
+  func showError(_ message: String) {
+    viewController?.showError(message)
   }
 }

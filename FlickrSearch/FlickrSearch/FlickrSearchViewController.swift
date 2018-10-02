@@ -75,9 +75,7 @@ class FlickrSearchViewController: UIViewController{
 
   fileprivate func resetForNewSearch() {
     interactor?.cancel()
-    collectionViewItems.removeAll()
-    page = 1
-    searchTerm = ""
+    interactor?.resetForNewSearch()
     collectionView.reloadData()
   }
 
@@ -99,6 +97,19 @@ extension FlickrSearchViewController: FlickrSearchDisplayLogic {
 
   func setSearchTerm(_ term: String) {
     searchTerm = term
+  }
+
+  func showError(_ message: String) {
+    let alertView = UIAlertController(
+      title: "Error",
+      message: message,
+      preferredStyle: .alert
+    )
+    alertView.addAction(
+      UIAlertAction(title: "Ok", style: .default)
+    )
+
+    present(alertView, animated: true)
   }
 
   func displayFetchedImages(viewModel: FlickrSearchModel.ViewModel) {
@@ -165,7 +176,7 @@ extension FlickrSearchViewController: UICollectionViewDataSource {
 
 extension FlickrSearchViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    if indexPath.item == collectionViewItems.count - 1 {
+    if indexPath.item == collectionViewItems.count - 2 {
       performSearch()
     }
   }
