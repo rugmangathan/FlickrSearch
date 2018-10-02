@@ -26,6 +26,7 @@
 		162CCA7A2163C05400864AFF /* FlickrSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA792163C05400864AFF /* FlickrSearchModel.swift */; };
 		162CCA7C2163CA0300864AFF /* FlickrSearchInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA7B2163CA0300864AFF /* FlickrSearchInteractorTests.swift */; };
 		162CCA7E2163CB2C00864AFF /* FlickrSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA7D2163CB2C00864AFF /* FlickrSearchInteractor.swift */; };
+		162CCA802163DB9900864AFF /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162CCA7F2163DB9900864AFF /* ApiError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		162CCA792163C05400864AFF /* FlickrSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchModel.swift; sourceTree = "<group>"; };
 		162CCA7B2163CA0300864AFF /* FlickrSearchInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchInteractorTests.swift; sourceTree = "<group>"; };
 		162CCA7D2163CB2C00864AFF /* FlickrSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchInteractor.swift; sourceTree = "<group>"; };
+		162CCA7F2163DB9900864AFF /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				162CCA542163A6E500864AFF /* Response */,
 				162CCA502163A61300864AFF /* ApiProtocol.swift */,
 				162CCA6B2163B5F300864AFF /* FlickrApi.swift */,
+				162CCA7F2163DB9900864AFF /* ApiError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162CCA802163DB9900864AFF /* ApiError.swift in Sources */,
 				162CCA692163B58900864AFF /* FlickrSearchWorker.swift in Sources */,
 				162CCA6C2163B5F300864AFF /* FlickrApi.swift in Sources */,
 				162CCA582163A85500864AFF /* Photo.swift in Sources */,
