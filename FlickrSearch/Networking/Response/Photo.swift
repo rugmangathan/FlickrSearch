@@ -30,4 +30,12 @@ struct Photo: Decodable, Equatable {
     case isFriend = "isfriend"
     case isFamily = "isfamily"
   }
+
+  func getImageUrl() -> URL {
+    guard let url = URL(string: "http://farm\(farm).static.flickr.com/\(server)/\(id)_\(secret).jpg") else {
+      fatalError("'Photo', getImageUrl() failed to create url.")
+    }
+
+    return url
+  }
 }

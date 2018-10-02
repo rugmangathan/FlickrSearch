@@ -47,5 +47,12 @@ struct Seeds {
       content: content,
       stat: "ok"
     )
+
+    static let viewModel = FlickrSearchModel.ViewModel(
+      displayInfo: FlickrSearchModel.ViewModel.DisplayInfo(
+        page: content.page,
+        urls: photos.map { $0.getImageUrl() }
+      )
+    )
   }
 }
