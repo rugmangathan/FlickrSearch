@@ -25,31 +25,32 @@ class FlickrSearchWorkerTests: XCTestCase {
     }
   }
 
-  func test_searchShouldAskFlickerApiToFetchImages() {
-    // Given
-    let flickrApi = FlickrApiSpy()
-    let searchTerm: String = "Dog"
-    let page = 1
+  var worker: FlickrSearchWorker!
+  var flickrApiSpy: FlickrApiSpy!
+  let searchTerm: String = "Dog"
+  let page = 1
 
+  override func setUp() {
+    worker = FlickrSearchWorker()
+    flickrApiSpy = FlickrApiSpy()
+    worker.flickrApi = flickrApiSpy
+  }
+
+  func test_searchShouldAskFlickerApiToFetchImages() {
     // When
-    flickrApi.search(with: searchTerm, page: page) { (_, _) in }
+    worker.search(with: searchTerm, page: page) { (_, _) in }
     
     // Then
     XCTAssertTrue(
-      flickrApi.fetchSuccess,
+      flickrApiSpy.fetchSuccess,
       "search(with:page:completionHandler:) should ask FlickrApi to fetch images"
     )
   }
 
   func test_searchShouldReturnImages_whenFlickrApiReturnFetchedImages() {
-    // Given
-    let flickrApi = FlickrApiSpy()
-    let searchTerm: String = "Dog"
-    let page = 1
-
     // When
     var actualResponse: FlickrResponse?
-    flickrApi.search(with: searchTerm, page: page) { (response, _) in
+    worker.search(with: searchTerm, page: page) { (response, _) in
       actualResponse = response
     }
 
@@ -60,5 +61,13 @@ class FlickrSearchWorkerTests: XCTestCase {
       actualResponse,
       "search(with:page:completionHandler:) should return fetched images if flickerApi succeeds"
     )
+  }
+
+  func test_shouldStopFetching_whenWorkerCallsCancel() {
+    // When
+    worker.cancel()
+
+    // Then
+    XCTAssertTrue(flickrApiSpy.cancelMethodExecuted)
   }
 }
