@@ -17,10 +17,12 @@ class FlickrSearchInteractor: FlickrSearchBusinessLogic {
   lazy var worker: FlickrSearchWorker = FlickrSearchWorker()
 
   func fetch(_ resquest: FlickrSearchModel.Request) {
-    worker.search(with: resquest.searchTerm, page: resquest.page) { (response, errror) in
-      self.presenter?.present(
-        response: FlickrSearchModel.Response(photoContent: response!.content)
-      )
+    worker.search(with: resquest.searchTerm, page: resquest.page) { (response, error) in
+      if error == nil {
+        self.presenter?.present(
+          response: FlickrSearchModel.Response(photoContent: response!.content)
+        )
+      }
     }
   }
 }
