@@ -212,6 +212,14 @@ extension FlickrSearchViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
+extension FlickrSearchViewController: UICollectionViewDataSourcePrefetching {
+  func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+    indexPaths.forEach { indexPath in
+      imageLoader.loadImage(url: collectionViewItems[indexPath.item], completion: { image in })
+    }
+  }
+}
+
 private extension FlickrSearchViewController {
   func isLoadingCell(for indexPath: IndexPath) -> Bool {
     return indexPath.item >= collectionViewItems.count
