@@ -64,13 +64,19 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="iU7-p5-geW"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="YEo-w7-Gj8">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rzY-HX-mrZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7Yb-B9-yaG"/>
                             <constraint firstItem="ued-uy-UyT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7sb-Sp-d1T"/>
                             <constraint firstItem="ued-uy-UyT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CQN-th-E7N"/>
+                            <constraint firstItem="YEo-w7-Gj8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ogh-NR-AO3"/>
                             <constraint firstItem="rzY-HX-mrZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aQb-UV-Hrw"/>
+                            <constraint firstItem="YEo-w7-Gj8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bJm-8z-hIO"/>
                             <constraint firstItem="ued-uy-UyT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cGv-PU-WnW"/>
                             <constraint firstItem="ued-uy-UyT" firstAttribute="top" secondItem="rzY-HX-mrZ" secondAttribute="bottom" id="hDE-77-br4"/>
                             <constraint firstItem="rzY-HX-mrZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pkt-cS-gub"/>
@@ -78,6 +84,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="YEo-w7-Gj8" id="odI-jj-t1S"/>
                         <outlet property="collectionView" destination="ued-uy-UyT" id="gT0-K6-Bil"/>
                         <outlet property="searchBar" destination="rzY-HX-mrZ" id="mB2-YH-hg0"/>
                     </connections>

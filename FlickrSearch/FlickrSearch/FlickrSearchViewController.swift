@@ -14,7 +14,8 @@ class FlickrSearchViewController: UIViewController{
 
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
-
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  
   private lazy  var collectionViewItems: [URL] = {
     return []
   }()
@@ -83,6 +84,15 @@ class FlickrSearchViewController: UIViewController{
     let request = FlickrSearchModel.Request(searchTerm: searchTerm, page: page)
     interactor?.fetch(request)
   }
+
+  fileprivate func showProgress(_ show: Bool) {
+    DispatchQueue.main.async {
+      show ? self.activityIndicator.startAnimating()
+        : self.activityIndicator.stopAnimating()
+      self.searchBar.isUserInteractionEnabled = !show
+      self.collectionView.isUserInteractionEnabled = !show
+    }
+  }
 }
 
 extension FlickrSearchViewController: FlickrSearchDisplayLogic {
@@ -113,24 +123,30 @@ extension FlickrSearchViewController: FlickrSearchDisplayLogic {
   }
 
   func displayFetchedImages(viewModel: FlickrSearchModel.ViewModel) {
-    page = viewModel.displayInfo.page + 1
-
-    collectionViewItems.append(contentsOf: viewModel.displayInfo.urls)
-    if page > 1 {
-      let startIndex = collectionViewItems.count - viewModel.displayInfo.urls.count
-      let endIndex = startIndex + viewModel.displayInfo.urls.count
-      let indexPaths =  (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
-      DispatchQueue.main.async { [weak self] in
-        guard let strongSelf = self else {
-          fatalError("'self' is nil")
-        }
-        strongSelf.collectionView.reloadData()
-        let indexPathsToReload = strongSelf.visibleIndexPathsToReload(intersecting: indexPaths)
-        strongSelf.collectionView.reloadItems(at: indexPathsToReload)
-      }
+    if viewModel.displayInfo.urls.isEmpty {
+      showProgress(false)
+      showError("Oops! Try some other keyword.")
     } else {
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
+      page = viewModel.displayInfo.page + 1
+
+      collectionViewItems.append(contentsOf: viewModel.displayInfo.urls)
+      if page > 1 {
+        let startIndex = collectionViewItems.count - viewModel.displayInfo.urls.count
+        let endIndex = startIndex + viewModel.displayInfo.urls.count
+        let indexPaths =  (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+        DispatchQueue.main.async { [weak self] in
+          guard let strongSelf = self else {
+            fatalError("'self' is nil")
+          }
+          strongSelf.showProgress(false)
+          strongSelf.collectionView.reloadData()
+          let indexPathsToReload = strongSelf.visibleIndexPathsToReload(intersecting: indexPaths)
+          strongSelf.collectionView.reloadItems(at: indexPathsToReload)
+        }
+      } else {
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
       }
     }
   }
@@ -141,8 +157,12 @@ extension FlickrSearchViewController: UISearchBarDelegate {
     searchBar.resignFirstResponder()
 
     resetForNewSearch()
-    guard let text = searchBar.text, !text.isEmpty else { return }
+    guard let text = searchBar.text, !text.isEmpty else {
+      showError("Type some keywords to search")
+      return
+    }
     searchTerm = text
+    showProgress(true)
     performSearch()
   }
 }
@@ -176,7 +196,7 @@ extension FlickrSearchViewController: UICollectionViewDataSource {
 
 extension FlickrSearchViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    if indexPath.item == collectionViewItems.count - 2 {
+    if indexPath.item == collectionViewItems.count - 4 {
       performSearch()
     }
   }

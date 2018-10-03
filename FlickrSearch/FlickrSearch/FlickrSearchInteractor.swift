@@ -20,8 +20,8 @@ class FlickrSearchInteractor: FlickrSearchBusinessLogic, FlickrSearchDataStore {
   var presenter: FlickrSearchPresentationLogic?
   lazy var worker: FlickrSearchWorker = FlickrSearchWorker()
 
-  func fetch(_ resquest: FlickrSearchModel.Request) {
-    worker.search(with: resquest.searchTerm, page: resquest.page) { (response, error) in
+  func fetch(_ request: FlickrSearchModel.Request) {
+    worker.search(with: request.searchTerm, page: request.page) { (response, error) in
       if let error = error as? ApiError {
         self.presenter?.showError(error.rawValue)
       }
