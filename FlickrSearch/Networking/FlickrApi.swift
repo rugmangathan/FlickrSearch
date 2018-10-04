@@ -55,7 +55,7 @@ class FlickrApi: ApiProtocol {
         fatalError("'FlickrApi' searchTerm encoding failed.")
     }
 
-    let urlString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a2a13f89fd07516492577e906ff41a6f&format=json&nojsoncallback=1&safe_search=1&page=\(pageCount.description)&text=\(escapedTerm)"
+    let urlString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3e7cc266ae2b0e0d78e279ce8e361736&format=json&nojsoncallback=1&safe_search=1&page=\(pageCount.description)&text=\(escapedTerm)"
 
     guard let url = URL(string: urlString) else {
       return nil
